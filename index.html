@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Modeling Sketch</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%231f4a3c' width='32' height='32' rx='8'/%3E%3Crect fill='%23f6f0e6' x='7' y='14' width='12' height='10'/%3E%3Crect fill='%23c4491d' x='13' y='8' width='12' height='12'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@380;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="stage">
+      <div id="viewport">
+        <canvas id="view"></canvas>
+        <div id="float-label" hidden></div>
+        <div id="empty" hidden>
+          <h2>A blank sheet.</h2>
+          <p>Draw an area on the plan, then push a face until it becomes a mass. Or open the one-room study and orbit it.</p>
+          <button id="empty-sample" type="button">Open the studio sample</button>
+        </div>
+      </div>
+      <header>
+        <div class="brand">
+          <div class="mark" aria-hidden="true"></div>
+          <div>
+            <p>Modeling Sketch</p>
+            <small>Massing study</small>
+          </div>
+        </div>
+        <input id="sketch-name" aria-label="Sketch name" value="Seongsu studio" />
+        <div class="actions">
+          <div id="views" role="group" aria-label="View">
+            <button type="button" data-view="plan" aria-pressed="false">Plan</button>
+            <button type="button" data-view="model" aria-pressed="true">Model</button>
+          </div>
+          <button id="undo" class="icon-button" type="button" aria-label="Undo" title="Undo">
+            <svg viewBox="0 0 22 22"><path d="M8 7H5V4"/><path d="M5.5 12a6.5 6.5 0 1 0 1.4-4.1L5 7"/></svg>
+          </button>
+          <button id="redo" class="icon-button" type="button" aria-label="Redo" title="Redo">
+            <svg viewBox="0 0 22 22"><path d="M14 7h3V4"/><path d="M16.5 12a6.5 6.5 0 1 1-1.4-4.1L17 7"/></svg>
+          </button>
+          <button id="fit" class="text-button" type="button">Fit</button>
+          <details id="file-menu" class="menu">
+            <summary aria-label="File">File</summary>
+            <div class="menu-list">
+              <button type="button" data-action="new">New sketch</button>
+              <button type="button" data-action="sample">Studio sample</button>
+              <button type="button" data-action="import">Import JSON</button>
+              <button type="button" data-action="export">Export JSON</button>
+            </div>
+          </details>
+          <button id="help-open" class="icon-button" type="button" aria-label="Shortcuts">?</button>
+        </div>
+      </header>
+      <nav id="tools" aria-label="Tools"></nav>
+      <aside id="side"><div id="side-body"></div></aside>
+      <footer id="status">
+        <span id="hint"></span>
+        <span id="cursor">—</span>
+        <span id="readout"></span>
+      </footer>
+      <input id="file-input" type="file" accept="application/json,.json" hidden />
+    </div>
+    <dialog id="help">
+      <div class="help-card">
+        <h2>Shortcuts</h2>
+        <dl>
+          <dt>V A W C</dt><dd>Select, area, wall, column</dd>
+          <dt>P G R</dt><dd>Push/Pull, move, rotate</dd>
+          <dt>M X</dt><dd>Measure, erase</dd>
+          <dt>1 / 2</dt><dd>Plan view / model view</dd>
+          <dt>Arrows</dt><dd>Nudge the selection. Shift nudges farther.</dd>
+          <dt>Right drag</dt><dd>Orbit in model view, pan in plan view</dd>
+          <dt>⌘Z / ⌘⇧Z</dt><dd>Undo / redo</dd>
+          <dt>⌘D / ⌘S</dt><dd>Duplicate / export JSON</dd>
+        </dl>
+        <button id="help-close" type="button">Close</button>
+      </div>
+    </dialog>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
