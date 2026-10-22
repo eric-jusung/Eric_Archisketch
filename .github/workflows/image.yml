@@ -58,4 +58,5 @@ jobs:
           git add deploy/kustomization.yaml
           git diff --cached --quiet && exit 0
           git commit -m "Deploy image ${GITHUB_SHA} [skip ci]"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
           git push
