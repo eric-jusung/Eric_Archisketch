@@ -6,4 +6,4 @@ resources:
   - ingress.yaml
 images:
   - name: ghcr.io/eric-jusung/eric-archisketch
-    newTag: latest
+    newTag: 18ea18395a358e2ec056cf18e8e4afc0405f9833
