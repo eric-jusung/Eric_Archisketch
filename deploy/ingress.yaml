@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: archisketch-co-jp
+  annotations:
+    # Change the issuer name if the cluster uses a different cert-manager ClusterIssuer.
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    external-dns.alpha.kubernetes.io/hostname: archisketch.co.jp,www.archisketch.co.jp
+spec:
+  ingressClassName: alb
+  tls:
+    - hosts:
+        - archisketch.co.jp
+        - www.archisketch.co.jp
+      secretName: archisketch-co-jp-tls
+  rules:
+    - host: archisketch.co.jp
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: archisketch-co-jp
+                port:
+                  name: http
+    - host: www.archisketch.co.jp
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: archisketch-co-jp
+                port:
+                  name: http

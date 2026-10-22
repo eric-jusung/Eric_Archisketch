@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: archisketch-co-jp
+  labels:
+    app: archisketch-co-jp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: archisketch-co-jp
+  template:
+    metadata:
+      labels:
+        app: archisketch-co-jp
+    spec:
+      containers:
+        - name: web
+          image: ghcr.io/eric-jusung/eric-archisketch:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              memory: 128Mi

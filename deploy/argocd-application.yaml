@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: archisketch-co-jp
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/eric-jusung/Eric_Archisketch.git
+    targetRevision: cursor/archisketch-static-site-90a3
+    path: deploy
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: archisketch-jp
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
